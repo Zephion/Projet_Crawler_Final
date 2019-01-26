@@ -40,7 +40,15 @@ class Base_donnee:
 
         self.connection.commit()             
 
+
+    def verification(self, motAchercher):
+       self.cherche = motAchercher
+       self.cursor.execute('''select id_theme from Theme where mot =?''', (self.cherche,))
+       self.idTheme = self.cursor.fetchone()
+       #print("Les id de la table theme: ", self.idTheme) 
+       return self.idTheme
+
        
     def selection(self, mot):
-       self.cursor.execute('''select url from Documentation, Appartient, Theme where theme.id_Theme = Appartient.id_Theme and Appartient.num_Doc = Documentation.num_Doc  and Theme.mot = ?''', (mot,))
+       self.cursor.execute('''select url, synonyme from Documentation, Appartient, Theme where theme.id_Theme = Appartient.id_Theme and Appartient.num_Doc = Documentation.num_Doc  and Theme.mot = ?''', (mot,))
        return self.cursor.fetchall()

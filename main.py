@@ -18,5 +18,5 @@ while i == 1:
 		Crawler().web(1,"https://fr.wiktionary.org/wiki/", MotAchercher)
 	else:
 		print("Le mot: ", MotAchercher," est déjà presente dans la base de donnée.")
-
-
+		Documentation = X.selection(MotAchercher)
+		print(Documentation)
